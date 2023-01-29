@@ -3,8 +3,8 @@ package credentials;
 import base.BaseTest;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.annotations.Test;
-import page.LoginPage;
-import page.ShoppingPage;
+import page.credentials.LoginPage;
+import page.shopping.ShoppingPage;
 
 public class LoginTests extends BaseTest {
     private LoginPage loginPage;
@@ -24,8 +24,8 @@ public class LoginTests extends BaseTest {
     }
 
     @Override
-    protected void initPages(AndroidDriver webDriver) {
-        loginPage = new LoginPage(webDriver);
-        shoppingPage = new ShoppingPage(webDriver);
+    protected void initPages(AndroidDriver driver) {
+        loginPage = new LoginPage(driver);
+        shoppingPage = new ShoppingPage(driver);
     }
 }

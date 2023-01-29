@@ -52,5 +52,5 @@ public abstract class BaseTest {
         return driver;
     }
 
-    protected abstract void initPages(AndroidDriver webDriver);
+    protected abstract void initPages(AndroidDriver driver);
 }

@@ -1,4 +1,4 @@
-package page;
+package page.shopping;
 
 import base.BasePage;
 import element.$;
@@ -43,13 +43,13 @@ public class ItemDetailPage extends BasePage {
 
     @Step("Clicking on back to products")
     public void clickOnBackToProducts() {
-        log.info("Clicking on back to products");
+        logs.info("Clicking on back to products");
         backToProductsButton.click();
     }
 
     @Step("Clicking on add to cart")
     public void clickOnAddToCart() {
-        log.info("Clicking on add to cart");
+        logs.info("Clicking on add to cart");
         addToCartButton.scrollTo().click();
     }
 }

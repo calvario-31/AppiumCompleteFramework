@@ -4,9 +4,9 @@ import base.BaseTest;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import page.ItemDetailPage;
-import page.ShoppingPage;
-import page.TopBarPage;
+import page.bars.TopBarPage;
+import page.shopping.ItemDetailPage;
+import page.shopping.ShoppingPage;
 
 public class ItemDetailTests extends BaseTest {
     private ItemDetailPage itemDetailPage;
@@ -46,9 +46,9 @@ public class ItemDetailTests extends BaseTest {
     }
 
     @Override
-    protected void initPages(AndroidDriver webDriver) {
-        shoppingPage = new ShoppingPage(webDriver);
-        itemDetailPage = new ItemDetailPage(webDriver);
-        topBarPage = new TopBarPage(webDriver);
+    protected void initPages(AndroidDriver driver) {
+        shoppingPage = new ShoppingPage(driver);
+        itemDetailPage = new ItemDetailPage(driver);
+        topBarPage = new TopBarPage(driver);
     }
 }

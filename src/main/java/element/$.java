@@ -19,7 +19,6 @@ public class $ {
     private final LocatorType locatorType;
     private final int timeOut;
     private WebDriverWait wait;
-    private boolean searchForElement = true;
     private final Gestures gestures;
 
     public $(LocatorType locatorType, String locator, AndroidDriver driver, int timeOut) {
@@ -52,6 +51,23 @@ public class $ {
 
     public $ scrollTo() {
         gestures.scrollInto(locatorString);
+        return this;
+    }
+
+    public $ dragTo($ destiny) {
+        gestures.dragOneItemToAnother(getWebElement(), destiny.getWebElement());
+        return this;
+    }
+
+    public $ doubleClick() {
+        findElement();
+        gestures.doubleClick(webElement);
+        return this;
+    }
+
+    public $ longTap(int duration) {
+        findElement();
+        gestures.longTap(webElement, duration);
         return this;
     }
 
@@ -103,8 +119,11 @@ public class $ {
     }
 
     private void findElement() {
-        if (searchForElement) {
-            webElement = driver.findElement(locator);
-        }
+        webElement = driver.findElement(locator);
+    }
+
+    public WebElement getWebElement() {
+        findElement(); //refresh web element
+        return webElement;
     }
 }

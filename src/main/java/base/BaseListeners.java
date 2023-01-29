@@ -1,5 +1,6 @@
 package base;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import utilities.FileManager;
@@ -11,10 +12,10 @@ public class BaseListeners {
     protected final FileManager fileManager = new FileManager();
     protected final Logs logs = new Logs();
 
-    protected void setDriver(ITestResult result) {
-        var currentClass = result.getInstance();
-        driver = ((BaseTest) currentClass).getDriver(); //for the test listeners
-        staticDriver = driver; //for allure listeners
+    protected void setDriver(ITestResult result, AndroidDriver driver) {
+        final var currentClass = result.getInstance();
+        this.driver = ((BaseTest) currentClass).getDriver(); //for the test listeners
+        staticDriver = driver;
     }
 
     protected void printSuccess(String className, String testName) {
@@ -39,5 +40,9 @@ public class BaseListeners {
         var message =
                 String.format("\t %s.%s ... \u001B[33m%s\u001B[0m", className, testName, status);
         System.out.println(message);
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
     }
 }

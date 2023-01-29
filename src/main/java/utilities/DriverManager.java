@@ -12,6 +12,7 @@ import java.net.URL;
 public class DriverManager {
     public static String deviceName;
     private final Logs logs = new Logs();
+    private static AndroidDriver staticDriver;
 
     public AndroidDriver buildRemoteDriver() {
         //TO-DO
@@ -33,11 +34,17 @@ public class DriverManager {
             desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
             desiredCapabilities.setCapability(MobileCapabilityType.APP, fileAPK.getAbsolutePath());
 
-            return new AndroidDriver(new URL(appiumUrl), desiredCapabilities);
+            final var driver = new AndroidDriver(new URL(appiumUrl), desiredCapabilities);
+            staticDriver = driver;
+            return driver;
         } catch (MalformedURLException malformedURLException) {
             malformedURLException.printStackTrace();
             logs.error("Failed building local driver");
             return null;
         }
+    }
+
+    public static AndroidDriver getStaticDriver() {
+        return staticDriver;
     }
 }

@@ -1,4 +1,4 @@
-package page;
+package page.credentials;
 
 import base.BasePage;
 import element.$;
@@ -37,21 +37,21 @@ public class LoginPage extends BasePage {
 
     @Step("Tapping on correct username")
     public void correctTapLogin() {
-        log.info("Tapping on correct username");
+        logs.info("Tapping on correct username");
         correctUsername.scrollTo().click();
         loginButton.click();
     }
 
     @Step("Tapping on locked username")
     public void incorrectTapLogin() {
-        log.info("Tapping on locked username");
+        logs.info("Tapping on locked username");
         lockedOutUsername.scrollTo().click();
         loginButton.click();
     }
 
     @Step("Verifying error message is displayed")
     public void verifyErrorMessage() {
-        log.info("Verifying error message is displayed");
+        logs.info("Verifying error message is displayed");
         Assert.assertTrue(errorMessageLabel.isDisplayed());
     }
 }
