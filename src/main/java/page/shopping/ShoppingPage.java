@@ -5,6 +5,7 @@ import element.$;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
 import page.bars.TopBarPage;
+import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 import static element.$.LocatorType.UIAUTOMATOR2;
@@ -45,13 +46,13 @@ public class ShoppingPage extends BasePage {
 
     @Step("Navigation to item detail {0}")
     public void goToItemDetail(String title) {
-        logs.info(String.format("Navigating to item detail %s", title));
+        Logs.info(String.format("Navigating to item detail %s", title));
         getTitle(title).scrollTo().click();
     }
 
     @Step("Dragging item {0}")
     public void addItemByDragging(String title, TopBarPage topBarPage) {
-        logs.info(String.format("Dragging item: %s", title));
+        Logs.info(String.format("Dragging item: %s", title));
         getDragItem(title).dragTo(topBarPage.getDropZone());
     }
 }

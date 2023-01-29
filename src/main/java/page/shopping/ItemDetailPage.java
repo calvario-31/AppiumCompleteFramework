@@ -4,6 +4,7 @@ import base.BasePage;
 import element.$;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
+import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 import static element.$.LocatorType.UIAUTOMATOR2;
@@ -43,13 +44,13 @@ public class ItemDetailPage extends BasePage {
 
     @Step("Clicking on back to products")
     public void clickOnBackToProducts() {
-        logs.info("Clicking on back to products");
+        Logs.info("Clicking on back to products");
         backToProductsButton.click();
     }
 
     @Step("Clicking on add to cart")
     public void clickOnAddToCart() {
-        logs.info("Clicking on add to cart");
+        Logs.info("Clicking on add to cart");
         addToCartButton.scrollTo().click();
     }
 }

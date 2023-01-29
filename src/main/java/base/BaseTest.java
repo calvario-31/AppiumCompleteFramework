@@ -16,8 +16,7 @@ import utilities.Logs;
 @Listeners({TestListeners.class, SuiteListeners.class, InvokeMethodListeners.class})
 public abstract class BaseTest {
     private final boolean runOnServer = System.getenv("JOB_NAME") != null;
-    private final Logs log = new Logs();
-    private AndroidDriver driver;
+    protected AndroidDriver driver;
     protected CommonFlows commonFlows;
     protected final String regression = "Regression";
     protected final String smoke = "Smoke";
@@ -44,8 +43,12 @@ public abstract class BaseTest {
 
     @AfterMethod(alwaysRun = true, description = "Killing the driver")
     protected void teardownDriver() {
-        log.debug("Killing the driver");
+        Logs.debug("Killing the driver");
         driver.quit();
+    }
+
+    public void triggerDeeplink(String url) {
+        driver.get(url);
     }
 
     public WebDriver getDriver() {

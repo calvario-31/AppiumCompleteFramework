@@ -11,7 +11,6 @@ import java.net.URL;
 
 public class DriverManager {
     public static String deviceName;
-    private final Logs logs = new Logs();
     private static AndroidDriver staticDriver;
 
     public AndroidDriver buildRemoteDriver() {
@@ -39,7 +38,7 @@ public class DriverManager {
             return driver;
         } catch (MalformedURLException malformedURLException) {
             malformedURLException.printStackTrace();
-            logs.error("Failed building local driver");
+            Logs.error("Failed building local driver");
             return null;
         }
     }

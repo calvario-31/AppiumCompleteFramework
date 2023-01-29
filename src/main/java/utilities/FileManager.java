@@ -16,32 +16,31 @@ public class FileManager {
     private final String allureReportsPath = "target/allure-results";
     private final String screenshotPath = "src/test/resources/screenshots";
     public static WebDriver staticDriver;
-    private final Logs logs = new Logs();
 
     public FileManager deleteTestEvidence() {
         try {
-            logs.debug("Deleting screenshots directory");
+            Logs.debug("Deleting screenshots directory");
             FileUtils.deleteDirectory(new File(screenshotPath));
         } catch (IOException ioException) {
-            logs.error("Failed deleting folder");
-            logs.error(ioException.getLocalizedMessage());
+            Logs.error("Failed deleting folder");
+            Logs.error(ioException.getLocalizedMessage());
         }
         return this;
     }
 
     public FileManager deleteAllureReports() {
         try {
-            logs.debug("Deleting previous allure results directory");
+            Logs.debug("Deleting previous allure results directory");
             FileUtils.deleteDirectory(new File(allureReportsPath));
         } catch (IOException ioException) {
-            logs.error("Failed deleting folder");
-            logs.error(ioException.getLocalizedMessage());
+            Logs.error("Failed deleting folder");
+            Logs.error(ioException.getLocalizedMessage());
         }
         return this;
     }
 
     public FileManager redirectStdErr() {
-        logs.debug("Redirecting stderr");
+        Logs.debug("Redirecting stderr");
         final var file = new File("src/test/resources/logs/stderr.log");
         FileOutputStream fos;
         try {
@@ -55,20 +54,20 @@ public class FileManager {
     }
 
     public void getScreenshot(WebDriver driver, String screenshotName) {
-        logs.debug("Taking screenshot");
+        Logs.debug("Taking screenshot");
         final var screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         final var path = String.format("%s/%s.png", screenshotPath, screenshotName);
         try {
             FileUtils.copyFile(screenshotFile, new File(path));
         } catch (IOException ioException) {
-            logs.error("Failed creating screenshot");
-            logs.error(ioException.getLocalizedMessage());
+            Logs.error("Failed creating screenshot");
+            Logs.error(ioException.getLocalizedMessage());
         }
     }
 
     @Attachment(value = "failureScreenshot", type = "image/png")
     public byte[] getAllureScreenshot(WebDriver driver) {
-        logs.debug("Taking allure screenshot");
+        Logs.debug("Taking allure screenshot");
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

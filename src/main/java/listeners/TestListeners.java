@@ -5,11 +5,12 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import utilities.DriverManager;
+import utilities.Logs;
 
 public class TestListeners extends BaseListeners implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
-        logs.testSteps();
+        Logs.testSteps();
         setDriver(result, DriverManager.getStaticDriver());
     }
 

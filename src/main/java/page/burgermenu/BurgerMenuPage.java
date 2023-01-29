@@ -4,6 +4,7 @@ import base.BasePage;
 import element.$;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
+import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 
@@ -14,7 +15,7 @@ public class BurgerMenuPage extends BasePage {
     private final $ geoLocationOption = $(ACCESSIBILITY_ID, "test-GEO LOCATION");
     private final $ drawingOption = $(ACCESSIBILITY_ID, "test-DRAWING");
     private final $ aboutOption = $(ACCESSIBILITY_ID, "test-ABOUT");
-    private final $ logoutOption = $(ACCESSIBILITY_ID, "test-LOGOUT");
+    private final $ LogsoutOption = $(ACCESSIBILITY_ID, "test-LogsOUT");
     private final $ resetAppStateOption = $(ACCESSIBILITY_ID, "test-RESET APP STATE");
 
     public BurgerMenuPage(AndroidDriver driver) {
@@ -35,26 +36,26 @@ public class BurgerMenuPage extends BasePage {
         softAssert.assertTrue(qrCodeScannerOption.isDisplayed());
         softAssert.assertTrue(geoLocationOption.isDisplayed());
         softAssert.assertTrue(aboutOption.isDisplayed());
-        softAssert.assertTrue(logoutOption.isDisplayed());
+        softAssert.assertTrue(LogsoutOption.isDisplayed());
         softAssert.assertTrue(resetAppStateOption.isDisplayed());
         softAssert.assertAll();
     }
 
     @Step("Selecting logout option")
     public void selectLogoutOption() {
-        logs.info("Selecting logout option");
-        logoutOption.click();
+        Logs.info("Selecting Logout option");
+        LogsoutOption.click();
     }
 
     @Step("Selecting drawing option")
     public void selectDrawingOption() {
-        logs.info("Selecting drawing option");
+        Logs.info("Selecting drawing option");
         drawingOption.click();
     }
 
     @Step("Selecting webview option")
     public void selectWebViewOption() {
-        logs.info("Selecting webview option");
+        Logs.info("Selecting webview option");
         webViewOption.click();
     }
 }

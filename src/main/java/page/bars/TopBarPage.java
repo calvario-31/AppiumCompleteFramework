@@ -5,6 +5,7 @@ import element.$;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
 import org.testng.Assert;
+import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 import static element.$.LocatorType.UIAUTOMATOR2;
@@ -38,7 +39,7 @@ public class TopBarPage extends BasePage {
 
     @Step("Verifying item count")
     public void verifyItemCount(int expectedCount) {
-        logs.info("Verifying item count");
+        Logs.info("Verifying item count");
         final var actualCount = Integer.parseInt(itemCountLabel.getText());
 
         Assert.assertEquals(actualCount, expectedCount);
@@ -46,13 +47,13 @@ public class TopBarPage extends BasePage {
 
     @Step("Clicking on menu burger icon")
     public void clickMenuBurger() {
-        logs.info("Clicking on menu burger icon");
+        Logs.info("Clicking on menu burger icon");
         menuOption.click();
     }
 
     @Step("Clicking on toggleView option")
     public void clickToggleView() {
-        logs.info("Clicking on toggleView option");
+        Logs.info("Clicking on toggleView option");
         toggleViewOption.click();
     }
 

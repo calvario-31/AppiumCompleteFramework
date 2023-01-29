@@ -5,6 +5,7 @@ import element.$;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
 import org.testng.Assert;
+import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 
@@ -21,13 +22,13 @@ public class LoginPage extends BasePage {
     }
 
     @Override
-    @Step("Waiting Login Page to Load")
+    @Step("Waiting Logsin Page to Load")
     public void waitPageToLoad() {
-        waitPage(usernameInput, "Login Page");
+        waitPage(usernameInput, "Logsin Page");
     }
 
     @Override
-    @Step("Verifying Login Page")
+    @Step("Verifying Logsin Page")
     public void verifyPage() {
         softAssert.assertTrue(usernameInput.isDisplayed());
         softAssert.assertTrue(passwordInput.isDisplayed());
@@ -37,21 +38,21 @@ public class LoginPage extends BasePage {
 
     @Step("Tapping on correct username")
     public void correctTapLogin() {
-        logs.info("Tapping on correct username");
+        Logs.info("Tapping on correct username");
         correctUsername.scrollTo().click();
         loginButton.click();
     }
 
     @Step("Tapping on locked username")
     public void incorrectTapLogin() {
-        logs.info("Tapping on locked username");
+        Logs.info("Tapping on locked username");
         lockedOutUsername.scrollTo().click();
         loginButton.click();
     }
 
     @Step("Verifying error message is displayed")
     public void verifyErrorMessage() {
-        logs.info("Verifying error message is displayed");
+        Logs.info("Verifying error message is displayed");
         Assert.assertTrue(errorMessageLabel.isDisplayed());
     }
 }
