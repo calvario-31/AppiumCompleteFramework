@@ -8,6 +8,7 @@ import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 import static element.$.LocatorType.UIAUTOMATOR2;
+import static element.$.Orientation.VERTICAL;
 
 public class ItemDetailPage extends BasePage {
     private final $ backToProductsButton = $(ACCESSIBILITY_ID, "test-BACK TO PRODUCTS");
@@ -37,7 +38,7 @@ public class ItemDetailPage extends BasePage {
         softAssert.assertTrue(productImage.isDisplayed());
         softAssert.assertTrue(productTitleLabel.isDisplayed());
         softAssert.assertTrue(productDescriptionLabel.isDisplayed());
-        softAssert.assertTrue(addToCartButton.scrollTo().isDisplayed()); //scroll
+        softAssert.assertTrue(addToCartButton.scrollTo(VERTICAL).isDisplayed()); //scroll
         softAssert.assertTrue(productPriceLabel.isDisplayed());
         softAssert.assertAll();
     }
@@ -51,6 +52,6 @@ public class ItemDetailPage extends BasePage {
     @Step("Clicking on add to cart")
     public void clickOnAddToCart() {
         Logs.info("Clicking on add to cart");
-        addToCartButton.scrollTo().click();
+        addToCartButton.scrollTo(VERTICAL).click();
     }
 }

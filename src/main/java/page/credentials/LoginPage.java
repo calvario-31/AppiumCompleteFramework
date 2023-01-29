@@ -8,6 +8,7 @@ import org.testng.Assert;
 import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
+import static element.$.Orientation.VERTICAL;
 
 public class LoginPage extends BasePage {
     private final $ usernameInput = $(ACCESSIBILITY_ID, "test-Username");
@@ -39,14 +40,14 @@ public class LoginPage extends BasePage {
     @Step("Tapping on correct username")
     public void correctTapLogin() {
         Logs.info("Tapping on correct username");
-        correctUsername.scrollTo().click();
+        correctUsername.scrollTo(VERTICAL).click();
         loginButton.click();
     }
 
     @Step("Tapping on locked username")
     public void incorrectTapLogin() {
         Logs.info("Tapping on locked username");
-        lockedOutUsername.scrollTo().click();
+        lockedOutUsername.scrollTo(VERTICAL).click();
         loginButton.click();
     }
 

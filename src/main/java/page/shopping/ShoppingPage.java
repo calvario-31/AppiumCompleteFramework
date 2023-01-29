@@ -9,6 +9,7 @@ import utilities.Logs;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 import static element.$.LocatorType.UIAUTOMATOR2;
+import static element.$.Orientation.VERTICAL;
 
 public class ShoppingPage extends BasePage {
     private final $ itemContainer = $(ACCESSIBILITY_ID, "test-PRODUCTS");
@@ -47,7 +48,7 @@ public class ShoppingPage extends BasePage {
     @Step("Navigation to item detail {0}")
     public void goToItemDetail(String title) {
         Logs.info(String.format("Navigating to item detail %s", title));
-        getTitle(title).scrollTo().click();
+        getTitle(title).scrollTo(VERTICAL).click();
     }
 
     @Step("Dragging item {0}")

@@ -49,9 +49,17 @@ public class $ {
         return this;
     }
 
-    public $ scrollTo() {
-        gestures.verticalScrollInto(locatorString);
-        return this;
+    public $ scrollTo(Orientation orientation) {
+        switch (orientation) {
+            case HORIZONTAL:
+                gestures.horizontalScrollInto(locatorString);
+                return this;
+            case VERTICAL:
+                gestures.verticalScrollInto(locatorString);
+                return this;
+            default:
+                return this;
+        }
     }
 
     public $ dragTo($ destiny) {
@@ -98,6 +106,11 @@ public class $ {
         ACCESSIBILITY_ID,
         CLASSNAME,
         UIAUTOMATOR2,
+    }
+
+    public enum Orientation {
+        HORIZONTAL,
+        VERTICAL,
     }
 
     private By buildLocator(String locator) {

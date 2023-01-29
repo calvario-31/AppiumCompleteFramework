@@ -64,28 +64,16 @@ public abstract class BasePage {
         gestures.generalSwipeByPercentages(x1, y1, x2, y2);
     }
 
-    @Step("Horizontal Swipe x1:{0} x2:{1}")
-    public void horizontalSwipe(int x1, int x2) {
-        Logs.info(String.format("Horizontal Swipe using x1: %d x2: %d", x1, x2));
-        gestures.generalHorizontalSwipeByPercentages(x1, x2);
+    @Step("Swipe init:{0} end:{1}")
+    public void swipe(int init, int end, $.Orientation orientation) {
+        Logs.info(String.format("Swipe using init: %d end: %d", init, end));
+        gestures.generalSwipeByPercentages(init, end, orientation);
     }
 
-    @Step("Vertical Swipe y1:{0} y2:{1}")
-    public void verticalSwipe(int y1, int y2) {
-        Logs.info(String.format("Vertical Swipe using y1: %d y2: %d", y1, y2));
-        gestures.generalVerticalSwipeByPercentages(y1, y2);
-    }
-
-    @Step("Horizontal Swipe x1:{0} x2:{1} y:{y}")
-    public void horizontalSwipe(int x1, int x2, int y) {
-        Logs.info(String.format("Horizontal Swipe using x1: %d x2: %d y: %d", x1, x2, y));
-        gestures.generalHorizontalSwipeByPercentages(x1, x2, y);
-    }
-
-    @Step("Vertical Swipe y1:{0} y2:{1} x:{x}")
-    public void verticalSwipe(int y1, int y2, int x) {
-        Logs.info(String.format("Vertical Swipe using y1: %d y2: %d x:%d", y1, y2, x));
-        gestures.generalVerticalSwipeByPercentages(y1, y2, x);
+    @Step("Swipe init:{0} end:{1} aux:{2}")
+    public void swipe(int init, int end, int aux, $.Orientation orientation) {
+        Logs.info(String.format("Swipe using x1: %d x2: %d aux: %d", init, end, aux));
+        gestures.generalSwipeByPercentages(init, end, aux, orientation);
     }
 
     public abstract void waitPageToLoad();

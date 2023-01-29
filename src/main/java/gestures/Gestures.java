@@ -1,5 +1,6 @@
 package gestures;
 
+import element.$;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
@@ -22,6 +23,7 @@ public class Gestures {
     public Gestures(AndroidDriver driver) {
         this.driver = driver;
         actions = new Actions(driver);
+        actions.setActivePointer(PointerInput.Kind.TOUCH, "finger");
     }
 
     public WebElement verticalScrollInto(String locatorString) {
@@ -31,7 +33,7 @@ public class Gestures {
         return driver.findElement(new AppiumBy.ByAndroidUIAutomator(uiAutomatorText));
     }
 
-    private WebElement horizontalScrollInto(String locatorString) {
+    public WebElement horizontalScrollInto(String locatorString) {
         Logs.debug(String.format("Horizontal scrolling into %s", locatorString));
         final var uiAutomatorText =
                 String.format("UiScrollable(scrollable(true)).setAsHorizontalList().scrollIntoView(%s)", locatorString);
@@ -47,27 +49,50 @@ public class Gestures {
         );
     }
 
-    public void generalVerticalSwipeByPercentages(int y1, int y2) {
-        generalSwipeByPercentages(50, y1, 50, y2);
+    public void generalSwipeByPercentages(int init, int end, $.Orientation orientation) {
+        switch (orientation) {
+            case HORIZONTAL:
+                generalSwipeByPercentages(init, 50, end, 50);
+                break;
+            case VERTICAL:
+                generalSwipeByPercentages(50, init, 50, end);
+                break;
+        }
     }
 
-    public void generalHorizontalSwipeByPercentages(int x1, int x2) {
-        generalSwipeByPercentages(x1, 50, x2, 50);
-    }
-
-    public void generalVerticalSwipeByPercentages(int y1, int y2, int x) {
-        generalSwipeByPercentages(x, y1, x, y2);
-    }
-
-    public void generalHorizontalSwipeByPercentages(int x1, int x2, int y) {
-        generalSwipeByPercentages(x1, y, x2, y);
+    public void generalSwipeByPercentages(int init, int end, int extra, $.Orientation orientation) {
+        switch (orientation) {
+            case HORIZONTAL:
+                generalSwipeByPercentages(init, extra, end, extra);
+                break;
+            case VERTICAL:
+                generalSwipeByPercentages(extra, init, extra, end);
+                break;
+        }
     }
 
     public void dragOneItemToAnother(WebElement originElement, WebElement destinyElement) {
-        final var originMiddlePoint = getMiddlePoint(originElement);
-        final var destinyMiddlePoint = getMiddlePoint(destinyElement);
+        final var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        final var sequence = new Sequence(finger, 1);
 
-        swipe(originMiddlePoint, destinyMiddlePoint, 500, 1500);
+        //move the finger down to the element or starting position
+        sequence.addAction(finger.createPointerMove(Duration.ZERO,
+                PointerInput.Origin.fromElement(originElement), 0, 0));
+
+        //tap the element
+        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+
+        //some pause
+        sequence.addAction(new Pause(finger, Duration.ofMillis(800)));
+
+        //move to the element
+        sequence.addAction(finger.createPointerMove(Duration.ofMillis(800),
+                PointerInput.Origin.fromElement(destinyElement), 0, 0));
+
+        //move the finger up of the screen
+        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        driver.perform(List.of(sequence));
     }
 
     public void scrollToTop() {
@@ -84,14 +109,12 @@ public class Gestures {
     }
 
     public void doubleClick(WebElement webElement) {
-        actions.moveToElement(webElement);
-        actions.doubleClick();
+        actions.doubleClick(webElement);
         actions.perform();
     }
 
     public void longTap(WebElement webElement, int duration) {
-        actions.moveToElement(webElement);
-        actions.clickAndHold();
+        actions.clickAndHold(webElement);
         actions.pause(Duration.ofSeconds(duration));
         actions.release();
         actions.perform();
@@ -102,9 +125,6 @@ public class Gestures {
 
         final var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         final var sequence = new Sequence(finger, 1);
-
-        finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg());
-        finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg());
 
         //move the finger down to the element or starting position
         sequence.addAction(finger.createPointerMove(Duration.ZERO,
@@ -126,18 +146,6 @@ public class Gestures {
         sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
         driver.perform(List.of(sequence));
-    }
-
-    private Point getMiddlePoint(WebElement webElement) {
-        final var location = webElement.getLocation();
-        final var rect = webElement.getRect();
-        final var halfWidth = rect.width / 2;
-        final var halfHeight = rect.height / 2;
-
-        final var x = location.getX() + halfWidth;
-        final var y = location.getY() + halfHeight;
-
-        return new Point(x, y);
     }
 
     private Point getPointUsingPercentages(int percentageX, int percentageY) {
