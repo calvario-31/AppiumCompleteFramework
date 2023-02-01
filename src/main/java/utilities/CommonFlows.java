@@ -27,6 +27,7 @@ public class CommonFlows {
         final var shoppingPage = new ShoppingPage(driver);
         final var itemDetailPage = new ItemDetailPage(driver);
 
+        goToShoppingPage();
         shoppingPage.goToItemDetail(productName);
         itemDetailPage.waitPageToLoad();
     }
