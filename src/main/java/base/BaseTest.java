@@ -24,7 +24,7 @@ public abstract class BaseTest {
     protected final DataProviders dataProviders = new DataProviders();
 
     private void initDriver() {
-        var driverManager = new DriverManager();
+        final var driverManager = new DriverManager();
 
         if (runOnServer) {
             driver = driverManager.buildRemoteDriver();

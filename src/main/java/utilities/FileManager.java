@@ -1,5 +1,6 @@
 package utilities;
 
+import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -15,7 +16,7 @@ import java.io.PrintStream;
 public class FileManager {
     private final String allureReportsPath = "target/allure-results";
     private final String screenshotPath = "src/test/resources/screenshots";
-    public static WebDriver staticDriver;
+    public static AndroidDriver staticDriver;
 
     public FileManager deleteTestEvidence() {
         try {

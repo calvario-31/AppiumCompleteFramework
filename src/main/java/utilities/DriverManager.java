@@ -42,8 +42,4 @@ public class DriverManager {
             return null;
         }
     }
-
-    public static AndroidDriver getStaticDriver() {
-        return staticDriver;
-    }
 }
