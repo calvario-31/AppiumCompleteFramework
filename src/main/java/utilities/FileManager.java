@@ -26,7 +26,7 @@ public class FileManager {
             Logs.debug("Deleting allure reports directory");
             FileUtils.deleteDirectory(new File(allureReportsPath));
         } catch (IOException ioException) {
-            Logs.error(String.format("Failed to delete directory: %s%n", ioException.getLocalizedMessage()));
+            Logs.error("Failed to delete directory: %s%n", ioException.getLocalizedMessage());
         }
         return this;
     }
@@ -71,7 +71,7 @@ public class FileManager {
                 fileWriter.close();
             }
         } catch (IOException ioException) {
-            Logs.error(String.format("Failed to write xml: %s%n", ioException.getLocalizedMessage()));
+            Logs.error("Failed to write xml: %s%n", ioException.getLocalizedMessage());
         }
         return this;
     }
@@ -83,7 +83,7 @@ public class FileManager {
         try {
             FileUtils.copyFile(screenshotFile, new File(path));
         } catch (IOException ioException) {
-            Logs.error(String.format("Failed creating screenshot: %s", ioException.getLocalizedMessage()));
+            Logs.error("Failed creating screenshot: %s", ioException.getLocalizedMessage());
         }
         return this;
     }

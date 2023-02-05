@@ -47,13 +47,13 @@ public class ShoppingPage extends BasePage {
 
     @Step("Navigation to item detail {0}")
     public void goToItemDetail(String title) {
-        Logs.info(String.format("Navigating to item detail %s", title));
+        Logs.info("Navigating to item detail %s", title);
         getTitle(title).scrollTo(VERTICAL).click();
     }
 
     @Step("Dragging item {0}")
     public void addItemByDragging(String title, TopBarPage topBarPage) {
-        Logs.info(String.format("Dragging item: %s", title));
+        Logs.info("Dragging item: %s", title);
         getDragItem(title).dragTo(topBarPage.getDropZone());
     }
 }

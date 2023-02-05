@@ -27,14 +27,14 @@ public class Gestures {
     }
 
     public WebElement verticalScrollInto(String locatorString) {
-        Logs.debug(String.format("Vertical scrolling into %s", locatorString));
+        Logs.debug("Vertical scrolling into %s", locatorString);
         final var uiAutomatorText =
                 String.format("UiScrollable(scrollable(true)).setAsVerticalList().scrollIntoView(%s)", locatorString);
         return driver.findElement(new AppiumBy.ByAndroidUIAutomator(uiAutomatorText));
     }
 
     public WebElement horizontalScrollInto(String locatorString) {
-        Logs.debug(String.format("Horizontal scrolling into %s", locatorString));
+        Logs.debug("Horizontal scrolling into %s", locatorString);
         final var uiAutomatorText =
                 String.format("UiScrollable(scrollable(true)).setAsHorizontalList().scrollIntoView(%s)", locatorString);
         return driver.findElement(new AppiumBy.ByAndroidUIAutomator(uiAutomatorText));
@@ -121,7 +121,7 @@ public class Gestures {
     }
 
     private void swipe(Point originPoint, Point destinyPoint, int secondsPauseMillis, int secondsMoveMillis) {
-        Logs.debug(String.format("Swiping from %s to %s", originPoint, destinyPoint));
+        Logs.debug("Swiping from %s to %s", originPoint, destinyPoint);
 
         final var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
         final var sequence = new Sequence(finger, 1);

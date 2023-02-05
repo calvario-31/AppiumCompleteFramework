@@ -47,6 +47,7 @@ public abstract class BaseTest {
     }
 
     protected void triggerDeeplink(String url) {
+        Logs.info("Triggering deeplink %s", url);
         driver.get(url);
     }
 

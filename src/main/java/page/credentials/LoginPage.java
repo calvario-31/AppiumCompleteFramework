@@ -23,13 +23,13 @@ public class LoginPage extends BasePage {
     }
 
     @Override
-    @Step("Waiting Logsin Page to Load")
+    @Step("Waiting Login Page to Load")
     public void waitPageToLoad() {
-        waitPage(usernameInput, "Logsin Page");
+        waitPage(usernameInput, "Login Page");
     }
 
     @Override
-    @Step("Verifying Logsin Page")
+    @Step("Verifying Login Page")
     public void verifyPage() {
         softAssert.assertTrue(usernameInput.isDisplayed());
         softAssert.assertTrue(passwordInput.isDisplayed());

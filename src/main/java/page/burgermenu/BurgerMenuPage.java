@@ -15,7 +15,7 @@ public class BurgerMenuPage extends BasePage {
     private final $ geoLocationOption = $(ACCESSIBILITY_ID, "test-GEO LOCATION");
     private final $ drawingOption = $(ACCESSIBILITY_ID, "test-DRAWING");
     private final $ aboutOption = $(ACCESSIBILITY_ID, "test-ABOUT");
-    private final $ LogsoutOption = $(ACCESSIBILITY_ID, "test-LogsOUT");
+    private final $ logoutOption = $(ACCESSIBILITY_ID, "test-LogsOUT");
     private final $ resetAppStateOption = $(ACCESSIBILITY_ID, "test-RESET APP STATE");
 
     public BurgerMenuPage(AndroidDriver driver) {
@@ -36,7 +36,7 @@ public class BurgerMenuPage extends BasePage {
         softAssert.assertTrue(qrCodeScannerOption.isDisplayed());
         softAssert.assertTrue(geoLocationOption.isDisplayed());
         softAssert.assertTrue(aboutOption.isDisplayed());
-        softAssert.assertTrue(LogsoutOption.isDisplayed());
+        softAssert.assertTrue(logoutOption.isDisplayed());
         softAssert.assertTrue(resetAppStateOption.isDisplayed());
         softAssert.assertAll();
     }
@@ -44,7 +44,7 @@ public class BurgerMenuPage extends BasePage {
     @Step("Selecting logout option")
     public void selectLogoutOption() {
         Logs.info("Selecting Logout option");
-        LogsoutOption.click();
+        logoutOption.click();
     }
 
     @Step("Selecting drawing option")

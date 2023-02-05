@@ -32,7 +32,7 @@ public class WebViewPage extends BasePage {
 
     @Step("Navigating to web view with url {0}")
     public void goToWebView(String url) {
-        Logs.info(String.format("Going to webview %s", url));
+        Logs.info("Going to webview %s", url);
         webInput.sendKeys(url);
         goToSiteButton.click();
     }
