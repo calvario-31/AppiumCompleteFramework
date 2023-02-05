@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidDriver;
 import page.bars.TopBarPage;
 import page.burgermenu.BurgerMenuPage;
 import page.burgermenu.DrawingPage;
+import page.burgermenu.WebViewPage;
 import page.credentials.LoginPage;
 import page.shopping.ItemDetailPage;
 import page.shopping.ShoppingPage;
@@ -32,6 +33,14 @@ public class CommonFlows {
         itemDetailPage.waitPageToLoad();
     }
 
+    private void openBurgerMenu() {
+        final var topBarPage = new TopBarPage(driver);
+        final var burgerMenuPage = new BurgerMenuPage(driver);
+
+        topBarPage.clickMenuBurger();
+        burgerMenuPage.waitPageToLoad();
+    }
+
     public void goToDrawingPage() {
         final var burgerMenuPage = new BurgerMenuPage(driver);
         final var drawingPage = new DrawingPage(driver);
@@ -43,11 +52,14 @@ public class CommonFlows {
         drawingPage.waitPageToLoad();
     }
 
-    private void openBurgerMenu() {
-        final var topBarPage = new TopBarPage(driver);
+    public void goToWebView() {
         final var burgerMenuPage = new BurgerMenuPage(driver);
+        final var webViewPage = new WebViewPage(driver);
 
-        topBarPage.clickMenuBurger();
-        burgerMenuPage.waitPageToLoad();
+        goToShoppingPage();
+        openBurgerMenu();
+
+        burgerMenuPage.selectWebViewOption();
+        webViewPage.waitPageToLoad();
     }
 }

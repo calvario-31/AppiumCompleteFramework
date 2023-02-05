@@ -1,7 +1,7 @@
 target
 .allure
 .idea
-/src/test/resources/logs/**
-/src/test/resources/screenshots/**
+/src/test/resources/logs
 **.DS_Store
 **.iml
+/src/test/resources/debugEvidence

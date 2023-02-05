@@ -76,6 +76,20 @@ public abstract class BasePage {
         gestures.generalSwipeByPercentages(init, end, aux, orientation);
     }
 
+    @Step("Switching to web context")
+    public void switchWebContext() {
+        Logs.debug("Switching to web context");
+        final var contextNames = driver.getContextHandles();
+        driver.context((String) contextNames.toArray()[1]); // set context to WEBVIEW
+    }
+
+    @Step("Switching to native app context")
+    public void switchNativeAppContext() {
+        Logs.debug("Switching to native app context");
+        final var contextNames = driver.getContextHandles();
+        driver.context((String) contextNames.toArray()[0]); // set context to NATIVE_APP
+    }
+
     public abstract void waitPageToLoad();
 
     public abstract void verifyPage();

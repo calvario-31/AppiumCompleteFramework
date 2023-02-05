@@ -9,7 +9,7 @@ public class SuiteListeners extends BaseListeners implements ISuiteListener {
     @Override
     public void onStart(ISuite suite) {
         Logs.startSuite(suite.getName());
-        fileManager.deleteTestEvidence().deleteAllureReports().redirectStdErr();
+        fileManager.deleteTestEvidence().redirectStdErr();
     }
 
     @Override
