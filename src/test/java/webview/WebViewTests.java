@@ -15,7 +15,7 @@ import java.time.Duration;
 public class WebViewTests extends BaseTest {
     private WebViewPage webViewPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true, description = setup)
     public void setUp() {
         commonFlows.goToWebView();
     }
@@ -24,7 +24,7 @@ public class WebViewTests extends BaseTest {
     public void goToSauceDemoTest() {
         //appium
         webViewPage.goToWebView("https://www.saucedemo.com");
-        webViewPage.switchWebContext();
+        switchWebContext();
 
         //selenium
         final var wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -39,7 +39,7 @@ public class WebViewTests extends BaseTest {
         Assert.assertTrue(driver.findElement(By.id("react-burger-menu-btn")).isDisplayed());
 
         //appium again
-        webViewPage.switchNativeAppContext();
+        switchNativeAppContext();
         webViewPage.pressBack();
         webViewPage.waitPageToLoad();
         webViewPage.verifyPage();
