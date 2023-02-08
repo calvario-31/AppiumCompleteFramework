@@ -8,7 +8,7 @@ import page.shopping.ItemDetailPage;
 public class DeepLinkItemDetailTests extends BaseTest {
     private ItemDetailPage itemDetailPage;
 
-    @Test
+    @Test(groups = {regression})
     public void deeplinkTest() {
         triggerDeeplink("swaglabs://swag-item/2");
         itemDetailPage.waitPageToLoad();

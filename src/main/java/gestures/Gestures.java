@@ -109,7 +109,10 @@ public class Gestures {
     }
 
     public void doubleClick(WebElement webElement) {
-        actions.doubleClick(webElement);
+        actions.moveToElement(webElement);
+        actions.click();
+        actions.pause(Duration.ofMillis(150));
+        actions.click();
         actions.perform();
     }
 

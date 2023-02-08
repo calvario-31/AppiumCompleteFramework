@@ -1,17 +1,20 @@
 package shopping;
 
 import base.BaseTest;
+import data.DataGiver;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import page.bars.TitleBarPage;
 import page.bars.TopBarPage;
 import page.credentials.LoginPage;
 import page.shopping.ShoppingPage;
 
 public class ShoppingTests extends BaseTest {
     private ShoppingPage shoppingPage;
-    private LoginPage loginPage;
+    private TitleBarPage titleBarPage;
     private TopBarPage topBarPage;
+    private LoginPage loginPage;
 
     @BeforeMethod(alwaysRun = true, description = setup)
     public void setUp() {
@@ -26,17 +29,19 @@ public class ShoppingTests extends BaseTest {
         loginPage.verifyPage();
     }
 
-    @Test(groups = {smoke})
+    @Test(groups = regression)
     public void dragTest() {
-        shoppingPage.addItemByDragging("Sauce Labs Backpack", topBarPage);
-        shoppingPage.addItemByDragging("Sauce Labs Bike Light", topBarPage);
-        topBarPage.verifyItemCount(2);
+        final var list = DataGiver.getItemTitleList();
+
+        shoppingPage.dragToCart(list, titleBarPage.getDropZone());
+        topBarPage.verifyItemCount(list.size());
     }
 
     @Override
-    protected void initPages(AndroidDriver driver) {
+    public void initPages(AndroidDriver driver) {
         loginPage = new LoginPage(driver);
-        shoppingPage = new ShoppingPage(driver);
         topBarPage = new TopBarPage(driver);
+        shoppingPage = new ShoppingPage(driver);
+        titleBarPage = new TitleBarPage(driver);
     }
 }

@@ -20,7 +20,7 @@ public class WebViewTests extends BaseTest {
         commonFlows.goToWebView();
     }
 
-    @Test
+    @Test(groups = regression)
     public void goToSauceDemoTest() {
         //appium
         webViewPage.goToWebView("https://www.saucedemo.com");

@@ -4,8 +4,9 @@ import base.BasePage;
 import element.$;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
-import page.bars.TopBarPage;
 import utilities.Logs;
+
+import java.util.List;
 
 import static element.$.LocatorType.ACCESSIBILITY_ID;
 import static element.$.LocatorType.UIAUTOMATOR2;
@@ -20,12 +21,13 @@ public class ShoppingPage extends BasePage {
         return $(UIAUTOMATOR2, dynamicLocator);
     }
 
-    private $ getDragItem(String title) {
-        final var dynamicLocator =
-                String.format("text(\"%s\").fromParent(" +
-                        "description(\"test-Drag Handle\")." +
-                        "childSelector(className(\"android.widget.TextView\")))", title);
-        return $(UIAUTOMATOR2, dynamicLocator);
+    private $ getDragHandler(String title) {
+        final var uiautomator2String =
+                String.format(
+                        "description(\"test-Item title\").text(\"%s\")." +
+                                "fromParent(description(\"test-Drag Handle\")." +
+                                "childSelector(className(\"android.widget.TextView\")))", title);
+        return $(UIAUTOMATOR2, uiautomator2String);
     }
 
     public ShoppingPage(AndroidDriver driver) {
@@ -51,9 +53,10 @@ public class ShoppingPage extends BasePage {
         getTitle(title).scrollTo(VERTICAL).click();
     }
 
-    @Step("Dragging item {0}")
-    public void addItemByDragging(String title, TopBarPage topBarPage) {
-        Logs.info("Dragging item: %s", title);
-        getDragItem(title).dragTo(topBarPage.getDropZone());
+    @Step("Drag {0} to cart")
+    public void dragToCart(List<String> listItems, $ dropZone) {
+        for (var element : listItems) {
+            getDragHandler(element).scrollTo(VERTICAL).dragTo(dropZone);
+        }
     }
 }

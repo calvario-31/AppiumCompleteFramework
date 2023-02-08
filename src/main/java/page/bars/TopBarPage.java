@@ -15,8 +15,6 @@ public class TopBarPage extends BasePage {
     private final $ cartOption = $(ACCESSIBILITY_ID, "test-Cart");
     private final $ itemCountLabel = $(UIAUTOMATOR2,
             "description(\"test-Cart\").childSelector(className(\"android.widget.TextView\"))");
-    private final $ toggleViewOption = $(ACCESSIBILITY_ID, "test-Toggle");
-    private final $ dropZone = $(ACCESSIBILITY_ID, "test-Cart drop zone"); //for drag and drop
 
     public TopBarPage(AndroidDriver driver) {
         super(driver);
@@ -33,7 +31,6 @@ public class TopBarPage extends BasePage {
     public void verifyPage() {
         softAssert.assertTrue(menuOption.isDisplayed());
         softAssert.assertTrue(cartOption.isDisplayed());
-        softAssert.assertTrue(toggleViewOption.isDisplayed());
         softAssert.assertAll();
     }
 
@@ -51,13 +48,5 @@ public class TopBarPage extends BasePage {
         menuOption.click();
     }
 
-    @Step("Clicking on toggleView option")
-    public void clickToggleView() {
-        Logs.info("Clicking on toggleView option");
-        toggleViewOption.click();
-    }
 
-    public $ getDropZone() {
-        return dropZone;
-    }
 }
